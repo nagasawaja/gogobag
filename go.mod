@@ -1,4 +1,4 @@
-module gogobag
+module github.com/nagasawaja/gogobag
 
 go 1.13
 
