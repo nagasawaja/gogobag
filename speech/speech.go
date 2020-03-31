@@ -9,7 +9,7 @@ import (
 )
 
 // baidu account struct
-type baiduAccountStruct struct {
+type BaiduAccountStruct struct {
 	AppKey    string
 	SecretKey string
 	Token     *responseTokenStruct
@@ -35,8 +35,8 @@ type responseBaiduStruct struct {
 const UrlStandardPattern = "http://vop.baidu.com/server_api"
 
 // new baidu speech
-func NewBaiDu(appKey, secretKey string) (*baiduAccountStruct, error) {
-	var account = baiduAccountStruct{
+func NewBaiDu(appKey, secretKey string) (*BaiduAccountStruct, error) {
+	var account = BaiduAccountStruct{
 		AppKey:    appKey,
 		SecretKey: secretKey,
 		Token:     &responseTokenStruct{},
@@ -47,7 +47,7 @@ func NewBaiDu(appKey, secretKey string) (*baiduAccountStruct, error) {
 
 // document https://ai.baidu.com/ai-doc/SPEECH/Vk38lxily
 // standard version
-func (account *baiduAccountStruct) StandardPattern(params *ParamsSpeechRequestStruct) (*responseBaiduStruct, error) {
+func (account *BaiduAccountStruct) StandardPattern(params *ParamsSpeechRequestStruct) (*responseBaiduStruct, error) {
 	// read file
 	fileByte, err := ioutil.ReadFile(params.FileName)
 	if err != nil {
@@ -76,7 +76,7 @@ func (account *baiduAccountStruct) StandardPattern(params *ParamsSpeechRequestSt
 	return &baiduResponse, nil
 }
 
-func (account *baiduAccountStruct) sendRequest(url string, contentType string, fileByte []byte) (*req.Resp, error) {
+func (account *BaiduAccountStruct) sendRequest(url string, contentType string, fileByte []byte) (*req.Resp, error) {
 	header := req.Header{
 		"Content-Type": contentType,
 	}

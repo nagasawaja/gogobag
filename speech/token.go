@@ -27,7 +27,7 @@ const UrlToken = "https://aip.baidubce.com/oauth/2.0/token"
 // lock
 var tokenLock = sync.Mutex{}
 
-func (account *baiduAccountStruct) getToken() (string, error) {
+func (account *BaiduAccountStruct) getToken() (string, error) {
 	tokenLock.Lock()
 	defer tokenLock.Unlock()
 	// check token expire
@@ -45,13 +45,13 @@ func (account *baiduAccountStruct) getToken() (string, error) {
 }
 
 // maybe refreshToken is need
-func (account *baiduAccountStruct) refreshToken() (string, error) {
+func (account *BaiduAccountStruct) refreshToken() (string, error) {
 	tokenLock.Lock()
 	defer tokenLock.Unlock()
 	return "", nil
 }
 
-func (account *baiduAccountStruct) getTokenRequest() (*responseTokenStruct, error) {
+func (account *BaiduAccountStruct) getTokenRequest() (*responseTokenStruct, error) {
 	params := req.Param{
 		"grant_type":    "client_credentials",
 		"client_id":     account.AppKey,
