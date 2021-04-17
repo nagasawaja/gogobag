@@ -144,7 +144,7 @@ func CheckIdCardValid(idCard string) error {
 }
 
 // 检测身份证年龄
-func CheckIdCardAge(idCard string, minAge int64) error {
+func CheckIdCardAge(idCard string, minAge int64, maxAge int64) error {
 	// init idcard
 	idCardByte := []byte(idCard)
 	// 获取idcard上的生日
@@ -154,7 +154,7 @@ func CheckIdCardAge(idCard string, minAge int64) error {
 	birthDayTimestamp, _ := time.ParseInLocation(timeLayout, string(idCardByte[6:14]), loc)
 	// 对比现在的时间戳
 	ageTimestamp := time.Now().Unix() - birthDayTimestamp.Unix()
-	if ageTimestamp >= (minAge-1)*86400*365 {
+	if ageTimestamp >= (minAge-1)*86400*365 && ageTimestamp <= (maxAge-1)*86400*365 {
 		return nil
 	} else {
 		return errors.New(fmt.Sprintf("idCard age less than minAge! idCard birthday:%v", string(idCardByte[6:14])))
