@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
+	"regexp"
 	"strconv"
 	"time"
 )
@@ -158,4 +159,11 @@ func CheckIdCardAge(idCard string, minAge int64) error {
 	} else {
 		return errors.New(fmt.Sprintf("idCard age less than minAge! idCard birthday:%v", string(idCardByte[6:14])))
 	}
+}
+
+var chineseReg = regexp.MustCompile("^[\u4e00-\u9fa5]+$")
+
+// 检测身份证名字是否中文
+func CheckChineseName(idName string) bool {
+	return chineseReg.MatchString(idName)
 }
